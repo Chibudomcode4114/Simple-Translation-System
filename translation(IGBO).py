@@ -2,6 +2,11 @@ import tkinter as tk
 from transformers import MarianMTModel, MarianTokenizer
 from langdetect import detect
 import threading
+import speech_recognition as sr
+import pyttsx3
+
+# Initialize text-to-speech engine
+tts_engine = pyttsx3.init()
 
 # Mapping source and target languages to the correct Hugging Face model identifiers
 LANGUAGE_PAIRS = {
@@ -39,8 +44,26 @@ def translate_text():
     def run_translation():
         translation = perform_translation(text, src_lang, tgt_lang)
         output_label.config(text=f"Translation: {translation}")
+        # Speak the translation
+        tts_engine.say(translation)
+        tts_engine.runAndWait()
 
     threading.Thread(target=run_translation).start()
+
+# Function to handle speech input
+def speech_to_text():
+    recognizer = sr.Recognizer()
+    with sr.Microphone() as source:
+        output_label.config(text="Listening...")
+        audio = recognizer.listen(source)
+    try:
+        text = recognizer.recognize_google(audio)
+        entry.delete(0, tk.END)
+        entry.insert(0, text)
+    except sr.UnknownValueError:
+        output_label.config(text="Sorry, I could not understand the audio.")
+    except sr.RequestError:
+        output_label.config(text="Could not request results; check your network connection.")
 
 # Create Tkinter application window
 root = tk.Tk()
@@ -69,6 +92,10 @@ tgt_lang_menu.pack()
 # Translate button
 translate_button = tk.Button(root, text="Translate", command=translate_text)
 translate_button.pack(pady=10)
+
+# Speech input button
+speech_button = tk.Button(root, text="Speak", command=speech_to_text)
+speech_button.pack(pady=10)
 
 # Output label
 output_label = tk.Label(root, text="")

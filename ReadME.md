@@ -28,6 +28,77 @@ In this updated version of the translation system, we've added an interactive co
 - **Translation History**: The system keeps track of translation history within the session.
 - **Processing Message**: A "processing..." message is displayed while the translation is being performed.
 
+## Development Phase 3
+
+### New Features and Enhancements
+
+- **Enhanced UI:**
+  - Enlarged the application window to 500x300 pixels.
+  - Added a welcome message at the top of the window.
+  
+- **Additional Languages:**
+  - Added support for Spanish, French, and German.
+  
+- **Improved Model Selection:**
+  - Implemented a dictionary to map language pairs to the correct Hugging Face model identifiers.
+  - Ensured proper model selection based on detected source and target languages.
+
+### Code Changes
+
+- Added `LANGUAGE_PAIRS` dictionary to map language pairs to model names.
+- Updated `perform_translation` function to use the correct model name based on the selected language pair.
+- Enhanced the Tkinter GUI to include additional languages in the dropdown menu.
+
+## Development Phase 4
+
+### New Features and Enhancements
+
+- **Enhanced UI:**
+  - Enlarged the application window to 500x300 pixels.
+  - Added a welcome message at the top of the window.
+  
+- **Additional Languages:**
+  - Added support for Spanish, French, and German.
+  
+- **Voice Capabilities:**
+  - Added speech-to-text functionality for input.
+
+## Usage
+
+1. **Run the application:**
+
+    ```bash
+    python translation_system.py
+    ```
+
+2. **Enter text to translate:**
+
+    - Type the text you want to translate in the input box or click the "Speak" button to use voice input.
+
+3. **Select target language:**
+
+    - Choose the target language from the dropdown menu.
+
+4. **Translate:**
+
+    - Click the "Translate" button.
+    - The application will detect the source language, perform the translation, and display the result.
+    - The translated text will also be read aloud  
+
+## Dependencies
+
+The project relies on the following Python libraries:
+
+- `tkinter`: For the graphical user interface.
+- `transformers`: For the translation models.
+- `langdetect`: For automatic language detection.
+- `threading`: For handling the translation process without blocking the UI.
+
+These dependencies are listed in the `requirements.txt` file.
+
+
+
+
 ### Usage
 
 To use the translation system:
