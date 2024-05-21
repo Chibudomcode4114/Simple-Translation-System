@@ -6,13 +6,27 @@ This repository contains a simple translation system implemented in Python. The 
 
 ### Overview
 
-In this initial development phase, we created a basic translation system capable of translating text from Igbo to English using pre-trained translation models. The system was implemented as a Python script with a command-line interface.
+In this initial development phase, I created a basic translation system capable of translating text from Igbo to English using pre-trained translation models. The system was implemented as a Python script with a command-line interface.
 
 ### Features
 
 - **Translation Functionality**: The system translates text from Igbo to English.
 - **Pre-trained Models**: It utilizes pre-trained translation models from the Hugging Face Transformers library.
 - **Simple CLI Interface**: Users interact with the system via a simple command-line interface.
+
+## Development Phase 2: Enhanced Translation System
+
+### Overview
+
+In this updated version of the translation system, we've added an interactive command-line interface (CLI) with language detection, bidirectional translation, translation history tracking, and a "processing..." message during translation.
+
+### Features
+
+- **Interactive CLI**: Users can interact with the system via a command-line interface.
+- **Language Detection**: The system automatically detects the language of the input text.
+- **Bidirectional Translation**: Translation can be performed in both directions (e.g., Igbo to English and English to Igbo).
+- **Translation History**: The system keeps track of translation history within the session.
+- **Processing Message**: A "processing..." message is displayed while the translation is being performed.
 
 ### Usage
 
