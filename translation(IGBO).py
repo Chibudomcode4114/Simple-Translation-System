@@ -1,6 +1,6 @@
 import tkinter as tk
 from transformers import MarianMTModel, MarianTokenizer
-from langdetect import detect
+from langdetect import detect, LangDetectException
 import threading
 import speech_recognition as sr
 import pyttsx3
@@ -37,7 +37,13 @@ def perform_translation(text, src_lang, tgt_lang):
 def translate_text():
     text = entry.get()  # Get input text from entry widget
     output_label.config(text="Processing...")  # Show "processing..." message
-    src_lang = detect(text)  # Detect source language
+
+    try:
+        src_lang = detect(text)  # Detect source language
+    except LangDetectException:
+        output_label.config(text="Could not detect language. Please enter more text.")
+        return
+
     tgt_lang = tgt_lang_var.get()  # Get target language from dropdown menu
 
     # Run the translation in a separate thread to avoid blocking the UI
@@ -68,7 +74,7 @@ def speech_to_text():
 # Create Tkinter application window
 root = tk.Tk()
 root.title("Simple Translation System")
-root.geometry("500x300")  # Set window size to 500x300 pixels
+root.geometry("600x400")  # Set window size to 600x400 pixels
 
 # Welcome message
 welcome_label = tk.Label(root, text="Welcome to my Simple Translation System", font=("Helvetica", 16))
@@ -77,7 +83,7 @@ welcome_label.pack(pady=10)
 # Input label and entry widget
 input_label = tk.Label(root, text="Enter text to translate:")
 input_label.pack()
-entry = tk.Entry(root, width=50)
+entry = tk.Entry(root, width=60)
 entry.pack()
 
 # Target language dropdown menu
@@ -93,12 +99,18 @@ tgt_lang_menu.pack()
 translate_button = tk.Button(root, text="Translate", command=translate_text)
 translate_button.pack(pady=10)
 
+# Feedback widget
+feedback_label = tk.Label(root, text="Feedback:")
+feedback_label.pack()
+feedback_entry = tk.Entry(root, width=60)
+feedback_entry.pack()
+
 # Speech input button
 speech_button = tk.Button(root, text="Speak", command=speech_to_text)
 speech_button.pack(pady=10)
 
 # Output label
-output_label = tk.Label(root, text="")
+output_label = tk.Label(root, text="", wraplength=500)
 output_label.pack(pady=10)
 
 # Run Tkinter event loop
