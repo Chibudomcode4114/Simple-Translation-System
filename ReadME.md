@@ -18,7 +18,7 @@ In this initial development phase, I created a basic translation system capable 
 
 ### Overview
 
-In this updated version of the translation system, we've added an interactive command-line interface (CLI) with language detection, bidirectional translation, translation history tracking, and a "processing..." message during translation.
+In this updated version of the translation system, I've added an interactive command-line interface (CLI) with language detection, bidirectional translation, translation history tracking, and a "processing..." message during translation.
 
 ### Features
 
